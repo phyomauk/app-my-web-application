@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phyo Mauk – My Neighbor Totoro</title>
+    <style>
+        /* --- Global Styles --- */
+        body {
+            margin: 0;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background-color: #f5f7f2; /* soft Ghibli-like pastel */
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            background-color: #6a8f72; /* forest green */
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Header Banner --- */
+        .banner {
+            background-image: url("totoro-banner.jpg"); /* Replace with your banner */
+            background-size: cover;
+            background-position: center;
+            height: 180px; /* reduced height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        /* --- Article Container --- */
+        .article-container {
+            max-width: 800px;
+            margin: 20px auto; /* reduced gap */
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #4a6b52;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        /* --- Image --- */
+        .poster {
+            width: 100%; /* matches paragraph width */
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        ul {
+            margin-top: 10px;
+        }
+
+        /* --- Comment Section --- */
+        .comment-section {
+            background-color: #eef3ea; /* soft Ghibli pastel */
+            border: 2px solid #c7d8c0;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .comment-section h2 {
+            color: #4a6b52;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .comment-section label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+            color: #4a6b52;
+        }
+
+        .comment-section input,
+        .comment-section textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #b7c9b1;
+            border-radius: 8px;
+            background-color: #f9faf7;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        .comment-section input:focus,
+        .comment-section textarea:focus {
+            outline: none;
+            border-color: #6a8f72;
+            box-shadow: 0 0 5px rgba(106,143,114,0.4);
+        }
+
+        .comment-section button {
+            margin-top: 18px;
+            background-color: #6a8f72;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .comment-section button:hover {
+            background-color: #587a60;
+        }
+
+        /* Displayed comments */
+        #comments-display {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #c7d8c0;
+        }
+
+        .comment {
+            background-color: #f4f7f2;
+            border: 1px solid #d7e3d2;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .comment strong {
+            color: #4a6b52;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .comment-date {
+            font-size: 0.85em;
+            color: #666;
+            font-style: italic;
+        }
+
+        .comment-body {
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: #6a8f72;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .footer span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">Studio Ghibli Fan Page</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Films</a>
+            <a href="#">Characters</a>
+            <a href="#">About</a>
+        </div>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="banner">
+        My Neighbor Totoro
+    </div>
+
+    <!-- Article Content -->
+    <div class="article-container">
+
+        <h1>A Film Worth Experiencing</h1>
+
+        <p>
+            Let me tell you about one of my favorite films.
+        </p>
+
+        <img src="totoro.jpg" alt="Totoro from My Neighbor Totoro" class="poster">
+
+        <p>
+            <strong>My Neighbor Totoro</strong> is a gentle, imaginative animated film from Studio Ghibli that follows two young sisters, Satsuki and Mei, as they move to the countryside and discover magical forest spirits—most notably Totoro, a huge, fluffy guardian who embodies wonder, comfort, and childhood curiosity.
+        </p>
+
+        <p>
+            The story is simple on the surface, but it’s filled with emotional depth. The girls navigate worry about their mother’s illness, find joy in small adventures, and build a quiet, healing connection with the natural world.
+        </p>
+
+        <h2>🌿 Why You Should Watch It</h2>
+
+        <ul>
+            <li><strong>It captures childhood perfectly.</strong> The film celebrates curiosity, imagination, and the magic found in everyday life.</li>
+            <li><strong>It’s visually stunning.</strong> Lush forests, soft lighting, and expressive animation make every frame feel warm and alive.</li>
+            <li><strong>Totoro is iconic.</strong> He’s comforting, mysterious, and instantly lovable—one of animation’s most enduring characters.</li>
+            <li><strong>It’s emotionally soothing.</strong> The calm tone makes it ideal for unwinding. It’s the cinematic equivalent of a deep breath.</li>
+            <li><strong>It’s timeless.</strong> Decades later, it still resonates because it’s built on universal feelings: wonder, fear, hope, and love.</li>
+            <li><strong>It’s suitable for all ages.</strong> Your kids and everyone in your family will love it. </li>
+        </ul>
+
+        <h2>Get lost for a bit in that world only you can see!</h2>
+
+        <h3>Web Author: Phyo Mauk</h3>
+
+        <p>
+            Current date &amp; time in Los Angeles:
+            <span id="pacific-time"></span>
+        </p>
+
+        <!-- Comment Section -->
+        <div class="comment-section">
+            <h2>Leave a Comment</h2>
+
+            <form id="comment-form">
+                <label>Name:</label>
+                <input type="text" id="name" required>
+
+                <label>Country:</label>
+                    <select id="country" required>
+                        <option value="">Select your country</option>
+                        <option value="United States">🇺🇸 United States</option>
+                        <option value="Canada">🇨🇦 Canada</option>
+                        <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                        <option value="Australia">🇦🇺 Australia</option>
+                        <option value="Japan">🇯🇵 Japan</option>
+                        <option value="South Korea">🇰🇷 South Korea</option>
+                        <option value="Germany">🇩🇪 Germany</option>
+                        <option value="France">🇫🇷 France</option>
+                        <option value="Italy">🇮🇹 Italy</option>
+                        <option value="Spain">🇪🇸 Spain</option>
+                        <option value="Mexico">🇲🇽 Mexico</option>
+                        <option value="Brazil">🇧🇷 Brazil</option>
+                        <option value="India">🇮🇳 India</option>
+                        <option value="China">🇨🇳 China</option>
+                        <option value="Singapore">🇸🇬 Singapore</option>
+                        <option value="Thailand">🇹🇭 Thailand</option>
+                        <option value="Philippines">🇵🇭 Philippines</option>
+                        <option value="Vietnam">🇻🇳 Vietnam</option>
+                        <option value="Myanmar">🇲🇲 Myanmar</option>
+                    </select>
+
+
+                <label>Your Comment:</label>
+                <textarea id="comment" rows="4" required></textarea>
+
+                <button type="submit">Submit Comment</button>
+            </form>
+
+            <div id="comments-display"></div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2026 Studio Ghibli Fan Page — Created by <span>Phyo Mauk</span><br>
+        Celebrating the magic of Hayao Miyazaki and the worlds he brought to life.
+    </div>
+
+<script>
+  /* --- Pacific Time Clock --- */
+  function updatePacificTime() {
+    const options = {
+      timeZone: "America/Los_Angeles",
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    };
+
+    const clockElement = document.getElementById("pacific-time");
+    if (clockElement) {
+      clockElement.textContent = new Date().toLocaleString("en-US", options);
+    }
+  }
+
+  updatePacificTime();
+  setInterval(updatePacificTime, 1000);
+
+  /* --- Backend Integration & Comment UI --- */
+  const API_URL = '/api/comments';
+
+  // 1. Fetch existing comments from DocumentDB/MongoDB and render them
+  async function displayComments() {
+    const displayContainer = document.getElementById('comments-display');
+    if (!displayContainer) return;
+
+    try {
+      const response = await fetch(API_URL);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const comments = await response.json();
+
+      // Ensure comments is an array
+      if (!Array.isArray(comments)) {
+        throw new Error('API output is not an array of comments');
+      }
+
+      displayContainer.innerHTML = comments.length === 0 ? '<p>No comments yet!</p>' : '';
+
+      comments.forEach(c => {
+        const commentCard = document.createElement('div');
+        commentCard.className = 'comment';
+
+        // Format date string safely
+        const commentDate = c.createdAt 
+          ? new Date(c.createdAt).toLocaleString('en-US', {
+              dateStyle: 'medium',
+              timeStyle: 'short'
+            })
+          : 'Just now';
+
+        // Escape potential XSS inputs
+        const safeName = escapeHtml(c.name || 'Anonymous');
+        const safeCountry = escapeHtml(c.country || 'Unknown');
+        const safeComment = escapeHtml(c.comment || '');
+
+        commentCard.innerHTML = `
+          <div class="comment-header">
+            <strong>${safeName}</strong> from <em>${safeCountry}</em>
+            <span class="comment-date">${commentDate}</span>
+          </div>
+          <div class="comment-body">
+            ${safeComment}
+          </div>
+        `;
+        displayContainer.appendChild(commentCard);
+      });
+    } catch (err) {
+      console.error('Error fetching comments:', err);
+      displayContainer.innerHTML = '<p style="color: red;">Unable to load comments. Please try again later.</p>';
+    }
+  }
+
+  // Helper function to sanitize user inputs and prevent XSS
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, function(m) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      }[m];
+    });
+  }
+
+  // 2. Handle form submission
+  document.addEventListener('DOMContentLoaded', () => {
+    // Automatically load comments when DOM is fully ready
+    displayComments();
+
+    const form = document.getElementById('comment-form');
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = {
+          name: document.getElementById('name').value,
+          country: document.getElementById('country').value,
+          comment: document.getElementById('comment').value
+        };
+
+        try {
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+          });
+
+          if (!res.ok) {
+            throw new Error(`Failed to post comment: ${res.status}`);
+          }
+
+          // Clear form & re-fetch comments
+          form.reset();
+          displayComments();
+        } catch (err) {
+          console.error('Error submitting comment:', err);
+          alert('Could not submit comment. Please check your network connection or server logs.');
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
