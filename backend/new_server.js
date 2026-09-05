@@ -30,9 +30,6 @@ mongoose.connection.on('connected', () => console.log('Successfully connected to
 mongoose.connection.on('error', (err) => console.error('Mongoose connection error:', err));
 mongoose.connection.on('disconnected', () => console.warn('Mongoose disconnected!'));
 
-// mongoose.connect(MONGO_URI, mongooseOptions)
-//  .catch(err => console.error('Initial database connection failure:', err));
-
 // Connection with recursive retry logic for DocumentDB startup resilience
 const connectWithRetry = async () => {
   try {
@@ -44,7 +41,6 @@ const connectWithRetry = async () => {
 };
 
 connectWithRetry();
-
 
 // Define Schema
 const commentSchema = new mongoose.Schema({
