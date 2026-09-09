@@ -1,0 +1,72 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Buildspec Verison 09-09-2026 v.1"
+      - echo "Starting pre-build phase..."
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_HOSTNAME
+      
+      # Generate image tags using Git commit hash or fallback to 'latest'
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_COMMIT_HASH | cut -c1-7)
+      - IMAGE_TAG=${COMMIT_HASH:-latest}
+
+  build:
+    commands:
+      - echo "Starting build phase..."
+      
+      # 1. Build & Tag Frontend Image
+      - echo "Building Frontend image from frontend/Dockerfile..."
+      - docker build -t $FRONTEND_ECR_REPO_URL:latest -f frontend/Dockerfile ./frontend
+      - docker tag $FRONTEND_ECR_REPO_URL:latest $FRONTEND_ECR_REPO_URL:$IMAGE_TAG
+
+      # 2. Build & Tag Backend Image
+      - echo "Building Backend image from backend/Dockerfile..."
+      - docker build -t $BACKEND_ECR_REPO_URL:latest -f backend/Dockerfile ./backend
+      - docker tag $BACKEND_ECR_REPO_URL:latest $BACKEND_ECR_REPO_URL:$IMAGE_TAG
+      - echo "Build Complete"
+
+  post_build:
+    commands:
+      - echo "Starting post-build phase..."
+      
+      # Push Frontend images to ECR
+      - echo "Pushing Frontend Docker images to ECR..."
+      - docker push $FRONTEND_ECR_REPO_URL:latest
+      - docker push $FRONTEND_ECR_REPO_URL:$IMAGE_TAG
+
+      # Push Backend images to ECR
+      - echo "Pushing Backend Docker images to ECR..."
+      - docker push $BACKEND_ECR_REPO_URL:latest
+      - docker push $BACKEND_ECR_REPO_URL:$IMAGE_TAG
+
+      # Generate imagedefinitions.json required by CodePipeline for ECS Deployment
+      # - echo "Generating imagedefinitions.json..."
+      # - printf '[{"name":"%s","imageUri":"%s"},{"name":"%s","imageUri":"%s"}]' "$FRONTEND_CONTAINER_NAME" "$FRONTEND_ECR_REPO_URL:$IMAGE_TAG" "$BACKEND_CONTAINER_NAME" "$BACKEND_ECR_REPO_URL:$IMAGE_TAG" > imagedefinitions.json
+      # - cat imagedefinitions.json
+
+      # Preparing templates for CodeDeploy
+      # 1. Copy base templates to build root
+      - cp aws/taskdef.json taskdef.json
+      - cp aws/appspec.yaml appspec.yaml
+
+      # 2. Substitute placeholders in taskdef.json
+      - sed -i "s|<TASK_FAMILY_NAME>|${TASK_FAMILY_NAME}|g" taskdef.json
+      - sed -i "s|<ECS_TASK_EXECUTION_ROLE_ARN>|${ECS_TASK_EXECUTION_ROLE_ARN}|g" taskdef.json
+      - sed -i "s|<AWS_REGION>|${AWS_DEFAULT_REGION}|g" taskdef.json
+      - sed -i "s|<DOCDB_URI_ARN>|${DOCDB_URI_ARN}|g" taskdef.json
+      - sed -i "s|<FRONTEND_CONTAINER_NAME>|${FRONTEND_CONTAINER_NAME}|g" taskdef.json
+      - sed -i "s|<FRONTEND_IMAGE_URI>|${FRONTEND_ECR_REPO_URL}:${IMAGE_TAG}|g" taskdef.json
+      - sed -i "s|<BACKEND_CONTAINER_NAME>|${BACKEND_CONTAINER_NAME}|g" taskdef.json
+      - sed -i "s|<BACKEND_IMAGE_URI>|${BACKEND_ECR_REPO_URL}:${IMAGE_TAG}|g" taskdef.json
+      - sed -i "s|<LOG_GROUP_NAME>|${LOG_GROUP_NAME}|g" taskdef.json
+
+      # 3. Substitute frontend container name in appspec.yaml
+      - sed -i "s|<FRONTEND_CONTAINER_NAME>|${FRONTEND_CONTAINER_NAME}|g" appspec.yaml
+
+artifacts:
+  files:
+    - taskdef.json
+    - appspec.yaml
+    # - imagedefinitions.json
