@@ -5,3 +5,5 @@
 
 run on AWS ECS
 - Totoro My Neighbors page 
+
+This repo is paired to the other repo: https://github.com/phyomauk/terraform-my-web-application 
