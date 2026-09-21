@@ -6,4 +6,4 @@
 run on AWS ECS
 - Totoro My Neighbors page 
 
-This repo is paired to the other repo: https://github.com/phyomauk/terraform-my-web-application 
+This repo is part of the terraform web application project, and it paired to the terraform project repo: https://github.com/phyomauk/terraform-my-web-application 
